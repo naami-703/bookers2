@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row no-gutters">
+
+    <!-- 部分テンプレート呼び出し -->
+    <div class="col-lg-4">
+      <%= render 'info', user: @user %>
+    </div>
+
+    <!-- 右側コンテンツ -->
+    <!-- Books詳細画面 -->
+    <div class="col-lg-8">
+      <h2>Book detail</h2>
+      <table>
+      <tr>
+      <%= link_to book_path(@book.id) do %>
+        <td><%= image_tag @user.get_user_image(100,100) %><br>
+          <%=link_to @book.user.name, user_path(@user.id) %></td>
+        <td><%=link_to @book.title, book_path(@book.id) %>
+          </td>
+        <td><%= @book.body %></td>
+        <% if @book.user == current_user %>
+          <td><%= link_to 'Edit', "/books/#{@book.id}/edit", class: 'btn btn-info mb-3', role: 'button' %></td>
+          <td><%= link_to "Destroy", books_path, method: :delete, class: 'btn btn-danger mb-3', role: 'button', "data-confirm" => "本当に削除しますか？" %></td>
+        <% end %>
+      <% end %>
+      </tr>
+      </table>
+    </div>
+  </div>
+</div>

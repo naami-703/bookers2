@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- KItCodeを使用して、FontAwesomeを導入 -->
+    <script src="https://kit.fontawesome.com/41e38c5826.js" crossorigin="anonymous"></script>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="d-flex flex-column vh-100">
+  <header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class ="container">
+        <a class="navbar-brand text-light" href="/">
+          <span>Bookers</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggler navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">            
+        <% if user_signed_in? %> 
+        <li class="nav-item m-2">
+          <%= link_to user_path(current_user.id) do %>
+            <p class="text-light"><i class="fa-solid fa-house"></i>Home</p>
+          <% end %>
+        </li>
+        <li class="nav-item m-2">
+          <%= link_to users_path do %>
+            <p class="text-light"><i class="fa-solid fa-users"></i>Users</p>
+          <% end %>
+        </li>
+        <li class="nav-item m-2">
+          <%= link_to books_path do %>
+            <p class="text-light"><i class="fa-solid fa-book-open"></i>Books</p>
+          <% end %>
+        </li>
+        <li class="nav-item m-2">
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <p class="text-light"><i class="fa-solid fa-right-from-bracket"></i>Log out</p>
+          <% end %>
+        </li>
+        <% else %>
+        <li class="nav-item m-2">
+          <%= link_to root_path do %>
+            <p class="text-light"><i class="fa-solid fa-house"></i>Home</p>
+          <% end %>
+        </li>
+        <li class="nav-item m-2">
+          <%= link_to about_path do %>
+            <p class="text-light"><i class="fa-solid fa-link"></i>About</p>
+          <% end %>
+        </li>
+        <li class="nav-item m-2">
+          <%= link_to new_user_registration_path do %>
+            <p class="text-light"><i class="fa-solid fa-user"></i>+Sign up</p>
+          <% end %>
+        </li>
+        <li class="nav-item m-2">
+          <%= link_to new_user_session_path do %>
+            <p class="text-light"><i class="fa-solid fa-right-to-bracket"></i>Log in</p>
+          <% end %>
+        </li>
+        <% end %>  
+        </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="mb-auto">
+  <div>
+  <% if @book.present? && @book.errors.any? %>
+  <ul class="alert-danger" role="alert">
+    <h6 class="alert-heading">
+      <%= @book.errors.count %>errors prohibited this obj from being saved:
+    </h6>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  </div>
+    <%= yield %>
+  </main>
+  <footer>
+    <div class="container mt-5">
+      <div class="row mx-auto">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </footer>
+  </body>
+</html>

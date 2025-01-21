@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row no-gutters">
+
+    <!-- 部分テンプレート呼び出し -->
+    <div class="col-lg-4">
+      <%= render 'books/info', user: @user %>
+    </div>
+
+    <!-- 右側コンテンツ -->
+    <!-- ログイン後ヘッダー「Users」クリック -->
+    <div class="col-lg-8">
+      <h2>Users</h2>
+          <table>
+            <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th></th>
+            </tr>
+            <% if @users.present? %>
+            <% @users.each do |user| %>
+              <tr>
+              <td><%= image_tag @user.get_user_image(100,100) %></td>
+              <td><%= user.name %></td>
+              <td><%= link_to "show", user_path(user.id) %></td>
+            </tr>
+            <% end %>
+          <% end %>
+          </table>
+    </div>
+  </div>
+</div>
+
+
+
+

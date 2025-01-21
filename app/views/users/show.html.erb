@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row no-gutters">
+
+    <!-- 部分テンプレート呼び出し -->
+    <div class="col-lg-4">
+      <%= render 'books/info', user: @user %>
+    </div>
+
+    <!-- 右側コンテンツ -->
+    <!-- ログイン後ヘッダー「Home」クリック -->
+    <div class="col-lg-8">
+      <h2>Books</h2>
+        <table>
+          <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Option</th>
+          </tr>
+          <% if @books.present? %>
+            <% @books.each do |book| %>
+                <tr>
+                  <td><%= image_tag @user.get_user_image(100,100) %>
+                  </td>
+                  <% if @book.present? %>
+                  <td><%= link_to book_path(@book.id) do %>
+                    <%= @book.title %>
+                  <% end %>
+                  </td>
+                  <td><%= book.body %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+          <% end %>
+        </table>
+    </div>
+  </div>
+</div>
