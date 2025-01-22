@@ -1,13 +1,13 @@
 <!-- error -->
 <% if @user.errors.any? %>
-<ul class="alert-danger" role="alert">
-  <h6 class="alert-heading">
-    <%= @user.errors.count %>errors prohibited this obj from being saved:
-  </h6>
-  <% @user.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-</ul>
+  <ul class="alert-error">
+    <h6 class="alert-error">
+      <%= @user.errors.count %>errors prohibited this obj from being saved:
+    </h6>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <h2>User info</h2>
