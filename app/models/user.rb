@@ -7,19 +7,18 @@ class User < ApplicationRecord
 # 投稿とユーザーの関連付け
   has_many :books, dependent: :destroy
 # プロフィール画像とユーザーの関連付け
-  has_one_attached :user_image
+  has_one_attached :profile_image
 
 # プロフィール画像がない時の設定(no-imageに設定）
 def get_user_image(width, height)
-  @user_image ||= user_image
-  unless @user_image.attached?
+  unless profile_image.attached?
     file_path = Rails.root.join('app/assets/images/no_image.jpg')
-    @user_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
   end
-    @user_image.variant(resize_to_limit: [width,height]).processed
+    profile_image.variant(resize_to_limit: [width,height]).processed
 end
 
 # nameの空欄NG（バリデーションチェック）
- validates :name, presence: true
-
+ validates :name, uniqueness: true, length: { in: 2..20 }, presence: true
+ validates :introduction, length: { maximum: 50 }
 end

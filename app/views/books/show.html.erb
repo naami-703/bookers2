@@ -1,14 +1,25 @@
+<!-- error -->
+<% if @book.errors.any? %>
+<ul class="alert-danger" role="alert">
+  <h6 class="alert-heading">
+    <%= @book.errors.count %>errors prohibited this obj from being saved:
+  </h6>
+  <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
 <div class="container">
   <div class="row no-gutters">
-
     <!-- 部分テンプレート呼び出し -->
-    <div class="col-lg-4">
-      <%= render 'info', user: @user %>
+    <div class="col-md-3">
+      <%= render 'info', user: @user, book: @book_new %>
     </div>
 
     <!-- 右側コンテンツ -->
     <!-- Books詳細画面 -->
-    <div class="col-lg-8">
+    <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
       <table>
       <tr>
@@ -19,8 +30,8 @@
           </td>
         <td><%= @book.body %></td>
         <% if @book.user == current_user %>
-          <td><%= link_to 'Edit', "/books/#{@book.id}/edit", class: 'btn btn-info mb-3', role: 'button' %></td>
-          <td><%= link_to "Destroy", books_path, method: :delete, class: 'btn btn-danger mb-3', role: 'button', "data-confirm" => "本当に削除しますか？" %></td>
+          <td><%= link_to 'Edit', edit_book_path(@book.id), class: 'btn btn-info mb-3' %></td>
+          <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class: 'btn btn-danger mb-3', role: 'button', "data-confirm" => "本当に削除しますか？" %></td>
         <% end %>
       <% end %>
       </tr>

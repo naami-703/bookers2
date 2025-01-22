@@ -60,7 +60,7 @@
         </li>
         <li class="nav-item m-2">
           <%= link_to new_user_registration_path do %>
-            <p class="text-light"><i class="fa-solid fa-user"></i>+Sign up</p>
+            <p class="text-light"><i class="fa-solid fa-user-plus"></i>Sign up</p>
           <% end %>
         </li>
         <li class="nav-item m-2">
@@ -75,20 +75,14 @@
     </nav>
   </header>
   <main class="mb-auto">
-  <div>
-  <% if @book.present? && @book.errors.any? %>
-  <ul class="alert-danger" role="alert">
-    <h6 class="alert-heading">
-      <%= @book.errors.count %>errors prohibited this obj from being saved:
-    </h6>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
+  
+  <!-- 成功メッセージ-->
+  <% flash.each do |message_type, message| %>
+    <div class="flash-message <%= message_type %>"><%= message %></div>
   <% end %>
-  </div>
     <%= yield %>
   </main>
+
   <footer>
     <div class="container mt-5">
       <div class="row mx-auto">

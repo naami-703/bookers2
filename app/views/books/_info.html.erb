@@ -4,32 +4,32 @@
   <div class="profile-container">
     <h3>User info</h3>
       <%= image_tag user.get_user_image(100,100) %>
-    <hr>
-    <table>
-      <tr>
-        <th>name</th>
-        <th><%= @user.name %></th>
-      </tr>
-      <tr>
-        <th>introduction</th>
-        <th><%= @user.introduction %></th>
-      </tr>
-    </table>
-    <hr>
-    <!-- editページボタン -->
-      <%= link_to edit_user_path(@user.id) do %>
+      <hr>
+      <table>
+        <tr>
+          <th>name</th>
+          <th><%= user.name %></th>
+        </tr>
+        <tr>
+          <th>introduction</th>
+          <th><%= user.introduction %></th>
+        </tr>
+      </table>
+      <hr>
+      <!-- editページボタン -->
+      <%= link_to edit_user_path(user.id) do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
-    </div>
+  </div>
 
-    <!-- 新規投稿 -->
-    <h3>New book</h3>
-    <%= form_with model: @book do |f| %>
-      <%= f.label :Title %><br />
-        <%= f.text_field :title, class: "form-control" %>
-      <%= f.label :Opition %><br />
-        <%= f.text_area :body, class: "form-control", rows: "3" %>
-      <hr>
-      <%= f.submit 'Create Book', class: "btn btn-lg btn-block btn-info mt-4" %>
-    <% end %>
+  <!-- 新規投稿 -->
+  <h3>New book</h3>
+  <%= form_with model: book do |f| %>
+    <%= f.label :Title %><br />
+      <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :Opition %><br />
+      <%= f.text_area :body, class: "form-control", rows: "3" %>
+    <hr>
+    <%= f.submit 'Create Book', class: "btn btn-lg btn-block btn-info mt-4" %>
+  <% end %>
 </div>
